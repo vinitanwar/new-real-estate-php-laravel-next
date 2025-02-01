@@ -1,0 +1,1 @@
+export const baseurl="https://prakarsh123.in/api/v1"
