@@ -1,23 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 
-use Illuminate\Support\Facades\Artisan;
-Route::get('/migrate', function () {
-
+Route::get('/storage-link', function () {
     Artisan::call('storage:link');
-    return 'Migrations have been run successfully!';
+    return 'Storage link created successfully!';
 });
 
-use App\Http\Controllers\InvoiceController;
-
-Route::get('/create-invoice', [InvoiceController::class, 'createInvoice']);
 
 
 

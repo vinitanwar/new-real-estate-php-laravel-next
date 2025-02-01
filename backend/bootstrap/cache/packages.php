@@ -13,6 +13,18 @@
       0 => 'AskerAkbar\\GptTrixEditor\\GptTrixEditorServiceProvider',
     ),
   ),
+  'barryvdh/laravel-dompdf' => 
+  array (
+    'aliases' => 
+    array (
+      'PDF' => 'Barryvdh\\DomPDF\\Facade\\Pdf',
+      'Pdf' => 'Barryvdh\\DomPDF\\Facade\\Pdf',
+    ),
+    'providers' => 
+    array (
+      0 => 'Barryvdh\\DomPDF\\ServiceProvider',
+    ),
+  ),
   'bezhansalleh/filament-shield' => 
   array (
     'aliases' => 
@@ -73,13 +85,6 @@
       0 => 'Filament\\Notifications\\NotificationsServiceProvider',
     ),
   ),
-  'filament/spatie-laravel-translatable-plugin' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Filament\\SpatieLaravelTranslatablePluginServiceProvider',
-    ),
-  ),
   'filament/support' => 
   array (
     'providers' => 
@@ -99,13 +104,6 @@
     'providers' => 
     array (
       0 => 'Filament\\Widgets\\WidgetsServiceProvider',
-    ),
-  ),
-  'genealabs/laravel-model-caching' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'GeneaLabs\\LaravelModelCaching\\Providers\\Service',
     ),
   ),
   'kirschbaum-development/eloquent-power-joins' => 
@@ -177,20 +175,13 @@
   ),
   'ryangjchandler/blade-capture-directive' => 
   array (
-    'aliases' => 
-    array (
-      'BladeCaptureDirective' => 'RyanChandler\\BladeCaptureDirective\\Facades\\BladeCaptureDirective',
-    ),
     'providers' => 
     array (
       0 => 'RyanChandler\\BladeCaptureDirective\\BladeCaptureDirectiveServiceProvider',
     ),
-  ),
-  'spatie/laravel-medialibrary' => 
-  array (
-    'providers' => 
+    'aliases' => 
     array (
-      0 => 'Spatie\\MediaLibrary\\MediaLibraryServiceProvider',
+      'BladeCaptureDirective' => 'RyanChandler\\BladeCaptureDirective\\Facades\\BladeCaptureDirective',
     ),
   ),
   'spatie/laravel-permission' => 
@@ -198,62 +189,6 @@
     'providers' => 
     array (
       0 => 'Spatie\\Permission\\PermissionServiceProvider',
-    ),
-  ),
-  'spatie/laravel-translatable' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Spatie\\Translatable\\TranslatableServiceProvider',
-    ),
-  ),
-  'tomatophp/console-helpers' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'TomatoPHP\\ConsoleHelpers\\ConsoleHelpersServiceProvider',
-    ),
-  ),
-  'tomatophp/filament-icons' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'TomatoPHP\\FilamentIcons\\FilamentIconsServiceProvider',
-    ),
-  ),
-  'tomatophp/filament-invoices' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'TomatoPHP\\FilamentInvoices\\FilamentInvoicesServiceProvider',
-    ),
-  ),
-  'tomatophp/filament-locations' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'TomatoPHP\\FilamentLocations\\FilamentLocationsServiceProvider',
-    ),
-  ),
-  'tomatophp/filament-notes' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'TomatoPHP\\FilamentNotes\\FilamentNotesServiceProvider',
-    ),
-  ),
-  'tomatophp/filament-translation-component' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'TomatoPHP\\FilamentTranslationComponent\\FilamentTranslationComponentServiceProvider',
-    ),
-  ),
-  'tomatophp/filament-types' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'TomatoPHP\\FilamentTypes\\FilamentTypesServiceProvider',
     ),
   ),
 );

@@ -35,7 +35,11 @@ class CategoryResource extends Resource
 
                 TextInput::make('title'),
                 TextInput::make('slug'),
-                FileUpload::make('image')->image(),
+                FileUpload::make('image')->image() // Restrict to image files
+                ->directory('blog') // S3 directory (e.g., 'users/abcd123.jpg')
+                ->disk('s3') // Use the S3 disk from config/filesystems.php
+                ->visibility(visibility: 'private') // Optional: Set file visibility
+                ->required(),
            
                
             ]);

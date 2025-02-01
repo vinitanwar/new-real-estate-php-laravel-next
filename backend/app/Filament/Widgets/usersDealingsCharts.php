@@ -3,7 +3,7 @@
 namespace App\Filament\Widgets;
 
 use Filament\Widgets\ChartWidget;
-use App\Models\AppliedVisa;
+
 class usersDealingsCharts extends ChartWidget
 {
     protected static ?string $heading = 'Chart';

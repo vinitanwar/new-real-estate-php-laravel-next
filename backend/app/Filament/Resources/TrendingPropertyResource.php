@@ -34,7 +34,11 @@ class TrendingPropertyResource extends Resource
                 //
                 TextInput::make('title'),
                 TextInput::make('propertyvalue'),
-                FileUpload::make('images_paths')->disk('public')->directory('storage')->image(), 
+                FileUpload::make('images_paths')->image() // Restrict to image files
+                ->directory('blog') // S3 directory (e.g., 'users/abcd123.jpg')
+                ->disk('s3') // Use the S3 disk from config/filesystems.php
+                ->visibility(visibility: 'private') // Optional: Set file visibility
+                ->required(),
             ]);
     }
 

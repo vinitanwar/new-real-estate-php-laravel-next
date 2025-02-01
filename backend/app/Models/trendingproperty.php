@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class trendingproperty extends Model
+class TrendingProperty extends Model
 {
     use HasFactory;
     protected $table = 'trending_properties';

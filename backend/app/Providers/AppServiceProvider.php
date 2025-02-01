@@ -6,11 +6,7 @@ use Illuminate\Support\ServiceProvider;
 
 use App\Providers\Filament\AdminPanelProvider;
 use App\Providers\Filament\AppPanelProvider;
-use TomatoPHP\FilamentInvoices\Facades\FilamentInvoices;
-use TomatoPHP\FilamentInvoices\Services\Contracts\InvoiceFor;
-use TomatoPHP\FilamentInvoices\Services\Contracts\InvoiceFrom;
-use App\Models\Account;
-use App\Models\Company;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -32,13 +28,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        FilamentInvoices::registerFor([
-            InvoiceFor::make(Account::class)
-                ->label('Account')
-        ]);
-        FilamentInvoices::registerFrom([
-            InvoiceFrom::make(Company::class)
-                ->label('Company')
-        ]);
+        //
     }
 }

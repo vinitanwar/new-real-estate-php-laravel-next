@@ -36,10 +36,10 @@ class AboutPageResource extends Resource
             Card::make([
                 FileUpload::make('banner_img')
                     ->label('Banner Image')
-                    ->image()
-                    ->disk('public')
-                    ->directory('about-page')
-                    ->imagePreviewHeight('150') // Optional: Adjust preview height
+                    ->image() // Restrict to image files
+                    ->directory('blog') // S3 directory (e.g., 'users/abcd123.jpg')
+                    ->disk('s3') // Use the S3 disk from config/filesystems.php
+                    ->visibility(visibility: 'private') // Optional: Set file visibility
                     ->required()
                     ->helperText('Upload a banner image for the About Page.'),
             ])->columns(1), // Use Card component for better styling
@@ -81,9 +81,11 @@ class AboutPageResource extends Resource
                             ->helperText('Description for the blog card.'),
                         FileUpload::make('image')
                             ->label('Image')
-                            ->image()
-                            ->disk('public')
-                            ->directory('about-page/blog-cards')
+                            ->image() // Restrict to image files
+                            ->directory('blog') // S3 directory (e.g., 'users/abcd123.jpg')
+                            ->disk('s3') // Use the S3 disk from config/filesystems.php
+                            ->visibility(visibility: 'private') // Optional: Set file visibility
+                            ->required()
                             ->imagePreviewHeight('150') 
                             ->helperText('Upload an image for the blog card.'),
                     ])

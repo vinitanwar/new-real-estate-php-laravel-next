@@ -5,6 +5,7 @@ import Image from "next/image";
 // import { MdOutlineElectricBolt } from "react-icons/md";
 
 // import { FaHeart, FaShareAlt } from 'react-icons/fa';
+import { FaRegHeart,FaHeart } from "react-icons/fa6";
 
 import { MdOutlineBed } from "react-icons/md";
 import { TbBath } from "react-icons/tb";
@@ -37,7 +38,18 @@ export default function Slidercom() {
       setNewData(filteredData);
     }
   }, [data, activeCategory]);
-
+  const wishlist= JSON.parse(localStorage.getItem("realstate_wishlist")) || []
+  const handelwishlist = (id) => {
+   
+      if (wishlist.includes(id)) {
+        const newWishlist = wishlist.filter(item => item !== id);
+        localStorage.setItem("realstate_wishlist", JSON.stringify(newWishlist));
+      } else {
+        localStorage.setItem("realstate_wishlist", JSON.stringify([...wishlist, id]));
+      }
+    
+    window.location.reload();
+  }
   return (
     <>
       <div className="w-full px-5 md:px-16 xl:px-32 py-10">
@@ -106,6 +118,9 @@ export default function Slidercom() {
         price={item.price}
         cate={item.type}
         flag={item.type}
+        handelwishlist={handelwishlist}
+        wishlist={wishlist}
+        id={item.id}
       />
     ))
   ) : (
@@ -131,6 +146,9 @@ const Cards = ({
   cate,
   flag,
   isLoading,
+  handelwishlist,
+  wishlist,
+  id
 }) => {
   return (
     <>
@@ -191,9 +209,21 @@ const Cards = ({
               )}
             </div>
             <div className="my-2 px-4 py-1">
+              <div className="flex justify-between">
               <h2 className="text-lg text-[#181a20] font-medium hover:underline">
                 {head}
               </h2>
+<div  className="text-xl text-red-500"     onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  handelwishlist(id);
+                }} >
+{wishlist.includes(id)? <FaHeart />:<FaRegHeart />}  
+</div>
+
+
+     
+      </div>
               <p className="text-[#717171] text-md mb-[10px]">{add}</p>
               <div className="flex border-[#ddd]">
                 <div className="flex items-center text-[13px] mr-[5px]">

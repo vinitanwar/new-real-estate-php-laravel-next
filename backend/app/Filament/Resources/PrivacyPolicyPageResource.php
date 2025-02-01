@@ -12,6 +12,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\RichEditor;
+
 
 class PrivacyPolicyPageResource extends Resource
 {
@@ -25,17 +27,20 @@ class PrivacyPolicyPageResource extends Resource
             ->schema([
                 Forms\Components\FileUpload::make('hero_img_1')
                 ->label('Hero Image 1')
+                ->image() // Restrict to image files
+                ->directory('blog') // S3 directory (e.g., 'users/abcd123.jpg')
+                ->disk('s3') // Use the S3 disk from config/filesystems.php
+                ->visibility(visibility: 'private') // Optional: Set file visibility
                 ->required(),
-            
-            Forms\Components\Textarea::make('description1')
+            Forms\Components\RichEditor::make('description1')
                 ->label('Description 1')
                 ->required(),
 
-            Forms\Components\Textarea::make('description2')
+            Forms\Components\RichEditor::make('description2')
                 ->label('Description 2')
                 ->required(),
 
-            Forms\Components\Textarea::make('description3')
+            Forms\Components\RichEditor::make('description3')
                 ->label('Description 3')
                 ->required(),
             ]);

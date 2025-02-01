@@ -50,8 +50,8 @@ class AppPanelProvider extends PanelProvider
                 ShareErrorsFromSession::class,
                 VerifyCsrfToken::class,
                 SubstituteBindings::class,
-            ]);
-           
+            ])
+            ->authGuard('build');
         
 
     }

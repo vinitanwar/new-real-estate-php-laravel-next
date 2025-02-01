@@ -60,8 +60,7 @@ class BuilderPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->authMiddleware([
-              
+                Authenticate::class,
             ]);
-           
     }
 }

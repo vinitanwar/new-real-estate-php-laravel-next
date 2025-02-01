@@ -35,7 +35,12 @@ class BlogResource extends Resource
                 DatePicker::make('date')->nullable(),
              
 
-                FileUpload::make('image')->nullable()->image(),
+                FileUpload::make('image')  ->label('Profile Image')
+                ->image() // Restrict to image files
+                ->directory('blog') // S3 directory (e.g., 'users/abcd123.jpg')
+                ->disk('s3') // Use the S3 disk from config/filesystems.php
+                ->visibility(visibility: 'private') // Optional: Set file visibility
+                ->required(),
                 TextInput::make('userposted_name')->nullable(),
                 TextInput::make('description1')->nullable(),
                 TextInput::make('heading2')->nullable(),

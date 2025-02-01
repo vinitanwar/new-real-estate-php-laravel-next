@@ -40,7 +40,11 @@ class TestimonialResource extends Resource
                 Textarea::make('description'),
                 TextInput::make('rating'),
 
-                FileUpload::make('image')->disk('public')->directory('storage')->image(), 
+                FileUpload::make('image')->image() // Restrict to image files
+                ->directory('blog') // S3 directory (e.g., 'users/abcd123.jpg')
+                ->disk('s3') // Use the S3 disk from config/filesystems.php
+                ->visibility(visibility: 'private') // Optional: Set file visibility
+                ->required(), 
             ]);
     }
 

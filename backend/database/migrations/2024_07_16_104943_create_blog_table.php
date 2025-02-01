@@ -21,7 +21,6 @@ return new class extends Migration
             $table->text('description1')->nullable();
             $table->string('heading2')->nullable();
             $table->json('listdata')->nullable(); 
-            $table->text('description1')->nullable()->change();
             $table->timestamps();
         });
     }

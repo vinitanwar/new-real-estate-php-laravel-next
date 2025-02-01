@@ -30,7 +30,6 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-            // ->registration()
             ->colors([
                 'danger' => Color::Red,
                 'gray' => Color::Slate,
@@ -69,11 +68,8 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->databaseNotifications()
             ->plugins([
-                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
-                \TomatoPHP\FilamentInvoices\FilamentInvoicesPlugin::make(),
-                \TomatoPHP\FilamentNotes\FilamentNotesPlugin::make()
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
             ]);
            
     }

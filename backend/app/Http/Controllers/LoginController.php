@@ -9,29 +9,26 @@ use Illuminate\Support\Facades\Hash;
 class LoginController extends Controller
 {
     //
-    function login(Request $request){
+  public  function login(Request $request){
+    $email=$request->input("email");
+     $res=Customer::where("email",$email)->first();
+     $inputpassword=$request->password;
+     
+  if(!$res){
+    return response()->json(["success"=>false,"message"=>" invalid email or password"]);
 
-$validate=$request->validate([
-    "email"=>"required",
-    "password"=>"required|min:6"
-]);
+  }
+  elseif(!Hash::check($inputpassword,$res->password)){
+    return response()->json(["success"=>false,"message"=>" invalid email or password"]);
 
-$verifyuser= Customer::where("email",$validate["email"])->first();
-if(!$verifyuser){
-    return response()->json(["success"=>false,"message"=>"enter valide data"]);
-}
-if(!Hash::check($validate["password"], $verifyuser["password"])){
-    return response()->json(["success"=>false,"message"=>"enter valide data"]);
-}else{
-    return response()->json(["success"=>true,"message"=>"Login successfully","user"=>$verifyuser]);
+  }else{
+    return response()->json(["success"=>true,"message"=>"login Success","user"=>$res]);
 
-}
-
+  }
 
 
 
- 
-
+   
 
 
     }

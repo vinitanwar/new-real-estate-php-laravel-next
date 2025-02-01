@@ -31,16 +31,6 @@ class property extends Model
         'address',
         'google_map_lat',
         'google_map_long',
-        'active',
-        'state',
-        'city',
-        'neighbourhood',
-        'furnishing', 
-        'project_status', 
-        'listed_by', 
-        'maintenance_monthly', 
-        'floor_no', 
-
     ];
 
     // Optionally, you can cast JSON fields to array
@@ -48,11 +38,4 @@ class property extends Model
         'images_paths' => 'array',
         'multiple_features' => 'array',
     ];
-
-    public function agent()
-    {
-        return $this->belongsTo(User::class, 'agent_post_id');
-    }
-
-    
 }

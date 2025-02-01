@@ -20,7 +20,6 @@ use Filament\Forms\Components\Select;
 
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\FileUpload;
-use Filament\Tables\Columns\ToggleColumn;
 
 class UserResource extends Resource
 {
@@ -30,7 +29,6 @@ class UserResource extends Resource
 
     public static function form(Form $form): Form
     {
-        // verified
         return $form
             ->schema([
                 TextInput::make('name'),
@@ -38,9 +36,6 @@ class UserResource extends Resource
             TextInput::make('password')
                 ->password()
                 ->required(),
-                TextInput::make('phone_number')
-                ->required(),
-                // 'phone_number',
             Select::make('roles')
                 ->relationship('roles', 'name')
                 ->multiple()
@@ -53,10 +48,7 @@ class UserResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-        ->query(fn (User $query) => $query->where('id', '!=', auth()->user()->id))
             ->columns([
-                ToggleColumn::make('verified')->label("Verify"),
-                ToggleColumn::make('active'),
                 TextColumn::make('name'),
                 TextColumn::make('email'),
                 TextColumn::make('roles.name')

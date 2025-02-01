@@ -10,7 +10,7 @@ const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phoneNumber: '',
+    number: '',
     message: ''
 
   });
@@ -34,8 +34,8 @@ const user= JSON.parse( localStorage.getItem("traveldealuser"));
     confirmButtonText: 'Try Agyan'
   })}
   else{
-    const newdata={...formData,user_id:user}
-const data=await axios.post(`${baseurl}/messagesend`,newdata)
+   
+const data=await axios.post(`${baseurl}/message`,formData)
 if(data.data.success){
   Swal.fire({
     title: 'send Message',
@@ -99,7 +99,7 @@ if(data.data.success){
             <input
               type="number"
               id="number "
-              name="phone"
+              name="number"
               placeholder='Phone Number'
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ee7461]"
               value={formData.phone}
