@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Filament\Builder\Resources;
-
 use App\Filament\Builder\Resources\PropertyResource\Pages;
 use App\Filament\Builder\Resources\PropertyResource\RelationManagers;
-use App\Models\property;
+use App\Models\Property;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -17,8 +15,29 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\TagsInput;
+use Filament\Forms\Components\Hidden;
+
 use Filament\Forms\Components\Select;
 
+use Filament\Notifications\Actions\Action;
+use Filament\Notifications\Notification;
+
+use app\Module\User;
+ 
+
+
+use Filament\Facades\Filament;
+
+
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Actions\BulkActionGroup;
+use Filament\Tables\Actions\DeleteAction;
+
+use App\Notifications\PropertyAddedNotification;
+use Illuminate\Support\Facades\Notification as LaravelNotification;
+
+use Filament\Tables\Actions\DeleteBulkAction;
 
 use Illuminate\Support\Str;
 class PropertyResource extends Resource
@@ -29,6 +48,7 @@ class PropertyResource extends Resource
 
     public static function form(Form $form): Form
     {
+
         return $form
         ->schema([
             forms\Components\Section::make('Add Property')->description('Add Content')->collapsible()->schema([
@@ -54,7 +74,8 @@ class PropertyResource extends Resource
             ])->columnSpan(1)->columns(2),
 
             forms\Components\Section::make('Add Property')->description('Add Content')->collapsible()->schema([
-                TextInput::make('agent_post_id')->nullable(),
+                Hidden::make('agent_post_id')
+                    ->default(fn() => auth()->id()),
                 Select::make('category_id')
                     ->options(\App\Models\Category::all()->pluck('title', 'id'))
                     ->required(),
@@ -63,8 +84,6 @@ class PropertyResource extends Resource
                     ->required(),
                 TextInput::make('bedrooms')->nullable(),
                 TextInput::make('bathrooms')->nullable()->columnSpanFull(),
-
-                // JsonInput::make('multiple_features')->nullable(),
                 Textarea::make('address')->nullable()->columnSpanFull(),
                 TextInput::make('google_map_lat')->nullable(),
                 TextInput::make('google_map_long')->nullable(),
@@ -75,7 +94,7 @@ class PropertyResource extends Resource
                 FileUpload::make('images_paths')->disk('public')->directory('storage')->image()->label('Gallery Images')->multiple(),
             ])->columnSpan(0),
 
-          
+
 
         ]);
     }

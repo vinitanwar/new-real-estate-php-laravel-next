@@ -28,7 +28,7 @@ class AboutPageResource extends Resource
     protected static ?string $model = AboutPage::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-bottom-center';
-    protected static ?string $navigationGroup = 'Appearance';
+    protected static ?string $navigationGroup = 'System Management';
     public static function form(Form $form): Form
     {
         return $form

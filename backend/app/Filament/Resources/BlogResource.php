@@ -55,7 +55,9 @@ class BlogResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id'),
-                ImageColumn::make('image')->square(),
+                ImageColumn::make('image')
+                ->disk('s3')
+                ->square(),
                 TextColumn::make('title'),
                 TextColumn::make('date'),
                 TextColumn::make('userposted_name'),

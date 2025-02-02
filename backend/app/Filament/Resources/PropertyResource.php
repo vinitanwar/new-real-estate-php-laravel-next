@@ -31,6 +31,8 @@ use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\JsonInput;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Actions\ViewAction;
+use App\Models\City;
+use App\Models\State;
 
 use Illuminate\Support\Str;
 
@@ -66,49 +68,201 @@ class PropertyResource extends Resource
 
                             $set('slug', Str::slug($state));
                         }),
-                    TextInput::make('slug')->required()->minLength(1)->unique(ignoreRecord: true)->maxLength(150)->unique(),
-                    TextInput::make('property_id')->required()->unique(),
+                    TextInput::make('slug'),
+                    TextInput::make('property_id')->required(),
 
-                    TextInput::make('price')
-                        ->tel()
-                        ->telRegex('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/'),
+
                     TextInput::make('rate_per_square_feet')->nullable()->step(0.01),
                     TagsInput::make('multiple_features')->required()->columnSpanFull(),
                     MarkdownEditor::make('property_description_1')->nullable()->columnSpanFull(),
                     MarkdownEditor::make('property_description_2')->nullable()->columnSpanFull(),
                 ])->columnSpan(1)->columns(2),
 
-                forms\Components\Section::make('Add Property')->description('Add Content')->collapsible()->schema([
-                    TextInput::make('agent_post_id')->nullable(),
+                Forms\Components\Section::make('Add Property')
+                ->description('Add Content')
+                ->collapsible()
+                ->schema([
+                   
+                    TextInput::make('agent_post_id')
+                        ->default(1)  // Set the default value to 1
+                        ->hidden(),
+            
+                    // Hardcoded Category Options
                     Select::make('category_id')
-                        ->options(\App\Models\Category::all()->pluck('title', 'id'))
+                        ->options([
+                            'sell' => 'Sell',
+                            'rent' => 'Rent',
+                        ])
                         ->required(),
+            
                     Select::make('type')
-                        ->options(\App\Models\Category::all()->pluck('title', 'id'))
+                        ->options(\App\Models\Category::all()->pluck('title', 'id')) // Keep dynamic options for 'type'
                         ->required(),
-                    TextInput::make('bedrooms')->nullable(),
-                    TextInput::make('bathrooms')->nullable()->columnSpanFull(),
+            
+                        Select::make('bedrooms')
+                        ->options([
+                            1 => '1',
+                            2 => '2',
+                            3 => '3',
+                            4 => '4',
+                            5 => '5',
+                        ])
+                        ->nullable(),
+                    
+                    Select::make('bathrooms')
+                        ->options([
+                            1 => '1',
+                            2 => '2',
+                            3 => '3',
+                            4 => '4',
+                            5 => '5',
+                        ])
+                        ->nullable(),
+                    
+            
+                    // Select::make('furnishing')
+                    //     ->options([
+                    //         'Furnished' => 'Furnished',
+                    //         'Semi-Furnished' => 'Semi-Furnished',
+                    //         'Unfurnished' => 'Unfurnished',
+                    //     ])
+                    //     ->nullable(),
+            
+                    // Select::make('project_status')
+                    //     ->options([
+                    //         'New Launch' => 'New Launch',
+                    //         'Ready to Move' => 'Ready to Move',
+                    //         'Under Construction' => 'Under Construction',
+                    //     ])
+                    //     ->nullable(),
+            
+                    // Select::make('listed_by')
+                    //     ->options([
+                    //         'Builder' => 'Builder',
+                    //         'Dealer' => 'Dealer',
+                    //         'Owner' => 'Owner',
+                    //     ])
+                    //     ->nullable(),
+            
+                    TextInput::make('maintenance_monthly')
+                        ->nullable()
+                        ->numeric() // Ensures that only numeric values are entered
+                        ->placeholder('Enter Monthly Maintenance Amount')
+                        ->visible(fn($get) => $get('category_id') === 'rent'), // Only visible for rent
+            
+                    TextInput::make('floor_no')
+                        ->nullable()
+                        ->numeric() // Ensures that only numeric values are entered
+                        ->placeholder('Enter Floor Number')
+                        ->visible(fn($get) => $get('category_id') === 'rent'), // Only visible for rent
+            
+                    TextInput::make('price')
+                        ->nullable()
+                        ->numeric() // Ensures that only numeric values are entered
+                        ->placeholder('Enter Price')
+                        ->visible(fn($get) => $get('category_id') === 'sell'), // Only visible for sell
+            
+                    TextInput::make('monthly_rent')
+                        ->nullable()
+                        ->numeric() // Ensures that only numeric values are entered
+                        ->placeholder('Enter Monthly Rent')
+                        ->visible(fn($get) => $get('category_id') === 'rent'), // Only visible for rent
+            
+                  
+                        
+                     
+            
+                        Forms\Components\Select::make('state_id')
+                        ->label('State')
+                        ->options(State::all()->pluck('name', 'id'))  // Get all states
+                        ->reactive()  // Make the state select field reactive
+                        ->required()
+                        ->searchable(),
+                    
+                    Forms\Components\Select::make('city_id')
+                        ->label('City')
+                        ->options(function (callable $get) {
+                            $stateId = $get('state_id');  // Get the selected state ID
+    
+                            if ($stateId) {
+                                return City::where('state_id', $stateId)->pluck('city', 'id');
+                            }
+    
+                            return [];  // Return an empty array if no state is selected
+                        })
+                        ->required()
+                        ->searchable(),
+            
+                TextInput::make('neighbourhood')
+                        ->nullable(),
 
-                    // JsonInput::make('multiple_features')->nullable(),
+            
+                    // Optionally, make some of these fields conditional
+                    Select::make('furnishing')
+                        ->options([
+                            'Furnished' => 'Furnished',
+                            'Semi-Furnished' => 'Semi-Furnished',
+                            'Unfurnished' => 'Unfurnished',
+                        ])
+                        ->nullable(),
+            
+                    Select::make('project_status')
+                        ->options([
+                            'New Launch' => 'New Launch',
+                            'Ready to Move' => 'Ready to Move',
+                            'Under Construction' => 'Under Construction',
+                        ])
+                        ->nullable(),
+            
+                    Select::make('listed_by')
+                        ->options([
+                            'Builder' => 'Builder',
+                            'Dealer' => 'Dealer',
+                            'Owner' => 'Owner',
+                        ])
+                        ->nullable(),
+            
+                    // TextInput::make('maintenance_monthly')
+                    //     ->nullable()
+                    //     ->numeric() // Ensures that only numeric values are entered
+                    //     ->placeholder('Enter Monthly Maintenance Amount')
+                    //     ->visible(fn($get) => $get('category_id') === 'rent'), // Only visible for rent
+            
+                    // TextInput::make('floor_no')
+                    //     ->nullable()
+                    //     ->numeric() // Ensures that only numeric values are entered
+                    //     ->placeholder('Enter Floor Number')
+                    //     ->visible(fn($get) => $get('category_id') === 'rent'), // Only visible for rent
+            
                     Textarea::make('address')->nullable()->columnSpanFull(),
                     TextInput::make('google_map_lat')->nullable(),
                     TextInput::make('google_map_long')->nullable(),
-                ])->columns(2)->columnSpan(1),
+                ])
+                ->columns(2) // Adjust the number of columns as needed
+                ->columnSpan(1),
+            
+
+                
 
                 forms\Components\Section::make('Gallery')->collapsible()->schema([
-                    FileUpload::make('cover_image')->label('Cover Image')->image() // Restrict to image files
-                    ->directory('blog') // S3 directory (e.g., 'users/abcd123.jpg')
-                    ->disk('s3') // Use the S3 disk from config/filesystems.php
-                    ->visibility(visibility: 'private') // Optional: Set file visibility
-                    ->required(),
-                    FileUpload::make('images_paths')->label('Gallery Images')->multiple()->image() // Restrict to image files
-                    ->directory('blog') // S3 directory (e.g., 'users/abcd123.jpg')
-                    ->disk('s3') // Use the S3 disk from config/filesystems.php
-                    ->visibility(visibility: 'private') // Optional: Set file visibility
-                    ->required(),
+                    FileUpload::make('cover_image')
+                    ->image()
+                    ->directory('blog')
+                    ->disk('s3')
+                    ->visibility(visibility: 'private')
+                    ->required()
+                    ->label('Cover Image'),
+                    FileUpload::make('images_paths')
+                    ->image()
+                    ->directory('blog') 
+                    ->disk('s3')
+                    ->visibility(visibility: 'private') 
+                    ->required()
+                     ->label('Gallery Images')
+                    ->multiple(),
                 ])->columnSpan(0),
 
-              
+
 
             ]);
     }

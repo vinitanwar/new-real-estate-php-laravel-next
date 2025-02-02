@@ -85,6 +85,13 @@
       0 => 'Filament\\Notifications\\NotificationsServiceProvider',
     ),
   ),
+  'filament/spatie-laravel-translatable-plugin' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Filament\\SpatieLaravelTranslatablePluginServiceProvider',
+    ),
+  ),
   'filament/support' => 
   array (
     'providers' => 
@@ -104,6 +111,13 @@
     'providers' => 
     array (
       0 => 'Filament\\Widgets\\WidgetsServiceProvider',
+    ),
+  ),
+  'genealabs/laravel-model-caching' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'GeneaLabs\\LaravelModelCaching\\Providers\\Service',
     ),
   ),
   'kirschbaum-development/eloquent-power-joins' => 
@@ -175,13 +189,20 @@
   ),
   'ryangjchandler/blade-capture-directive' => 
   array (
+    'aliases' => 
+    array (
+      'BladeCaptureDirective' => 'RyanChandler\\BladeCaptureDirective\\Facades\\BladeCaptureDirective',
+    ),
     'providers' => 
     array (
       0 => 'RyanChandler\\BladeCaptureDirective\\BladeCaptureDirectiveServiceProvider',
     ),
-    'aliases' => 
+  ),
+  'spatie/laravel-medialibrary' => 
+  array (
+    'providers' => 
     array (
-      'BladeCaptureDirective' => 'RyanChandler\\BladeCaptureDirective\\Facades\\BladeCaptureDirective',
+      0 => 'Spatie\\MediaLibrary\\MediaLibraryServiceProvider',
     ),
   ),
   'spatie/laravel-permission' => 
@@ -189,6 +210,48 @@
     'providers' => 
     array (
       0 => 'Spatie\\Permission\\PermissionServiceProvider',
+    ),
+  ),
+  'spatie/laravel-translatable' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\Translatable\\TranslatableServiceProvider',
+    ),
+  ),
+  'tomatophp/console-helpers' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'TomatoPHP\\ConsoleHelpers\\ConsoleHelpersServiceProvider',
+    ),
+  ),
+  'tomatophp/filament-icons' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'TomatoPHP\\FilamentIcons\\FilamentIconsServiceProvider',
+    ),
+  ),
+  'tomatophp/filament-notes' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'TomatoPHP\\FilamentNotes\\FilamentNotesServiceProvider',
+    ),
+  ),
+  'tomatophp/filament-translation-component' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'TomatoPHP\\FilamentTranslationComponent\\FilamentTranslationComponentServiceProvider',
+    ),
+  ),
+  'tomatophp/filament-types' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'TomatoPHP\\FilamentTypes\\FilamentTypesServiceProvider',
     ),
   ),
 );
