@@ -26,7 +26,7 @@ export const navLink = [
       Key: 'blog'
     }
   ];
-  export const apiLink = 'https://prakarsh123.in/api/v1'
-  export const storageLink = 'https://prakarsh123.in/storage'
+  export const apiLink = 'https://admin.ever4uproperties.com/api/v1'
+  export const storageLink = 'https://realeastetbucket.s3.eu-north-1.amazonaws.com'
 
   // /storage/$

@@ -21,7 +21,7 @@ export default function Home() {
   <Builderslider/>
   <Testimonial/>
   <Blog/>
-  <Nowme/>
+ 
    </>
   );
 }

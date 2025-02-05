@@ -1,1 +1,0 @@
-export const Link = 'http://localhost:8000'
