@@ -28,6 +28,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getbanner } from "./store/slices/bannerimgSlice";
 import { storageLink } from "../constants";
 
+
+
 // const images = [
 //   { src: 'https://plus.unsplash.com/premium_photo-1680582107403-04dfac02efc3?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', alt: 'Image 1' },
 //   { src: 'https://images.unsplash.com/photo-1460472178825-e5240623afd5?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', alt: 'Image 2' },
@@ -131,7 +133,7 @@ export default function Hero() {
   }, [searchTerm, cities]);
 
   // const citiesSs = citiesData.map(city => ({ name: city }));
-
+  let MineCitiy = 'https://admin.ever4uproperties.com/storage'
   return (
     <>
       <div className="flex justify-center flex-col relative items-center ">
@@ -143,7 +145,7 @@ export default function Hero() {
                   className="h-[300px] lg:h-[500px] relative z-10"
                 >
                   <img
-                    src={`${storageLink}/${img.image}`}
+                    src={`${MineCitiy}/${img.image}`}
                     alt={img.image}
                     className="w-full h-full object-fill"
                   />

@@ -28,7 +28,7 @@ class SitelayoutResource extends Resource
 {
     protected static ?string $model = Sitelayout::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-window';
     protected static ?string $navigationGroup = 'System Management';
 
     public static function form(Form $form): Form
