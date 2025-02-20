@@ -23,7 +23,7 @@ const Cards = ({ imgsrc, title, subhead }) => {
      <Link href={`/properties/${title}`} className="coursor-pointer">
    
       <div className="img-box">
-        <Image src={`${storageLink}/${imgsrc}`} className="w-[350px]  h-[250px] object-cover	" width={217} height={220} />
+        <Image src={`https://admin.ever4uproperties.com/storage/${imgsrc}`} className="w-[350px]  h-[250px] object-cover	" width={217} height={220} />
       </div>
       <div className="p-[20px]">
         <h5 className="pb-0 text-xl font-semibold">{title}</h5>

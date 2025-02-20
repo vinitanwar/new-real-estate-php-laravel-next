@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
-import { FaRegHeart ,FaHeart} from "react-icons/fa6";
+import { FaRegHeart, FaHeart } from "react-icons/fa6";
 
 
 import { MdOutlineBed } from "react-icons/md";
@@ -21,6 +21,13 @@ export default function Slidercom() {
   const [newData, setNewData] = useState("");
   const dispatch = useDispatch();
 
+
+  const [visibleCount, setVisibleCount] = useState(8);
+
+  const handleLoadMore = () => {
+    setVisibleCount(newData.length); 
+  };
+
   useEffect(() => {
     setisloading(true);
     dispatch(getProperty());
@@ -38,20 +45,20 @@ export default function Slidercom() {
   }, [data, activeCategory]);
 
 
-   let wishlist;
+  let wishlist;
 
   if (typeof window !== "undefined") {
-   wishlist =  JSON.parse(localStorage.getItem("realstate_wishlist")) || []
+    wishlist = JSON.parse(localStorage.getItem("realstate_wishlist")) || []
   }
   const handelwishlist = (id) => {
-   
-      if (wishlist.includes(id)) {
-        const newWishlist = wishlist.filter(item => item !== id);
-        localStorage.setItem("realstate_wishlist", JSON.stringify(newWishlist));
-      } else {
-        localStorage.setItem("realstate_wishlist", JSON.stringify([...wishlist, id]));
-      }
-    
+
+    if (wishlist.includes(id)) {
+      const newWishlist = wishlist.filter(item => item !== id);
+      localStorage.setItem("realstate_wishlist", JSON.stringify(newWishlist));
+    } else {
+      localStorage.setItem("realstate_wishlist", JSON.stringify([...wishlist, id]));
+    }
+
     window.location.reload();
   }
 
@@ -72,9 +79,8 @@ export default function Slidercom() {
             {["All", "Rent", "Pg", "Buy", "Commercial"].map((value, index) => (
               <button
                 key={index}
-                className={`px-4 py-[7px] mr-[10px] text-[18px] font-semibold text-black border-2 rounded-[6px] border-black ${
-                  activeCategory == index ? "bg-black text-white" : ""
-                }`}
+                className={`px-4 py-[7px] mr-[10px] text-[18px] font-semibold text-black border-2 rounded-[6px] border-black ${activeCategory == index ? "bg-black text-white" : ""
+                  }`}
                 onClick={() => setActiveCategory(index)}
               >
                 {value}
@@ -84,56 +90,69 @@ export default function Slidercom() {
         </div>
 
         <div className="cards-container w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4   lg:gap-4   mt-4 lg:mt-8 relative">
-            {isLoading ? (
-  <>
-    <div className="animate-pulse">
-      <div className="w-full h-[220px] bg-gray-300"></div>
+          {isLoading ? (
+            <>
+              <div className="animate-pulse">
+                <div className="w-full h-[220px] bg-gray-300"></div>
 
-      <div className="my-2 px-4 py-1">
-        <div className="h-5 bg-gray-300 rounded-md mb-2 w-3/4"></div>
-        <div className="h-4 bg-gray-300 rounded-md mb-2 w-1/2"></div>
+                <div className="my-2 px-4 py-1">
+                  <div className="h-5 bg-gray-300 rounded-md mb-2 w-3/4"></div>
+                  <div className="h-4 bg-gray-300 rounded-md mb-2 w-1/2"></div>
 
-        <div className="flex space-x-3">
-          <div className="h-4 w-1/4 bg-gray-300 rounded-md"></div>
-          <div className="h-4 w-1/4 bg-gray-300 rounded-md"></div>
-          <div className="h-4 w-1/4 bg-gray-300 rounded-md"></div>
+                  <div className="flex space-x-3">
+                    <div className="h-4 w-1/4 bg-gray-300 rounded-md"></div>
+                    <div className="h-4 w-1/4 bg-gray-300 rounded-md"></div>
+                    <div className="h-4 w-1/4 bg-gray-300 rounded-md"></div>
+                  </div>
+
+                  <hr className="mt-2 bg-gray-300" />
+
+                  <div className="flex justify-between my-3">
+                    <div className="h-4 w-1/3 bg-gray-300 rounded-md"></div>
+                    <div className="h-4 w-1/4 bg-gray-300 rounded-md"></div>
+                  </div>
+                </div>
+              </div>
+            </>
+          ) : (
+            Array.isArray(newData) && newData.length > 0 ? (
+              newData.slice(0, visibleCount).map((item, index) => (
+                <Cards
+                  key={index}
+                  img={item.images_paths?.[0] || "default-image.jpg"} // Fallback for missing images
+                  head={item.name}
+                  add={item.address}
+                  bed={item.bedroom}
+                  bath={item.bathroom}
+                  slug={item.slug}
+                  space={item.rate_per_square_feet}
+                  price={item.price}
+                  cate={item.type}
+                  flag={item.type}
+                  id={item.id}
+                  handelwishlist={handelwishlist}
+                  wishlist={wishlist}
+                />
+              ))
+            ) : (
+              <p className="text-center text-gray-500">No data available.</p>
+            )
+          )}
+
         </div>
 
-        <hr className="mt-2 bg-gray-300" />
-
-        <div className="flex justify-between my-3">
-          <div className="h-4 w-1/3 bg-gray-300 rounded-md"></div>
-          <div className="h-4 w-1/4 bg-gray-300 rounded-md"></div>
+        {newData.length > 2 && visibleCount < newData.length && (
+        <div className="text-center mt-6">
+          <button
+            onClick={handleLoadMore}
+            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+          >
+            Load More
+          </button>
         </div>
-      </div>
-    </div>
-  </>
-) : (
-  Array.isArray(newData) && newData.length > 0 ? (
-    newData.map((item, index) => (
-      <Cards
-        key={index}
-        img={item.images_paths?.[0] || "default-image.jpg"} // Fallback for missing images
-        head={item.name}
-        add={item.address}
-        bed={item.bedroom}
-        bath={item.bathroom}
-        slug={item.slug}
-        space={item.rate_per_square_feet}
-        price={item.price}
-        cate={item.type}
-        flag={item.type}
-         id={item.id}
-         handelwishlist={handelwishlist}
-         wishlist={wishlist}
-      />
-    ))
-  ) : (
-    <p className="text-center text-gray-500">No data available.</p>
-  )
-)}
+      )}
 
-        </div>
+
       </div>
     </>
   );
@@ -155,10 +174,10 @@ const Cards = ({
   handelwishlist,
   wishlist
 }) => {
-  
+
   return (
     <>
-      <div className="relative sm:max-w-[360px] lg:max-w-[400px] overflow-hidden cursor-pointer bg-white rounded-lg shadow-lg m-2">
+      <div className="relative overflow-hidden cursor-pointer bg-white rounded-lg shadow-lg m-2">
         {isLoading ? (
           // Skeleton Loader
           <div className="animate-pulse">
@@ -213,7 +232,7 @@ const Cards = ({
                   handelwishlist(id);
                 }}>
                   <span className="text-red-500 font-bold shadow-md  text-md  text-[24px] ">
-                  {wishlist.includes(id)? <FaHeart />:<FaRegHeart />}  
+                    {wishlist.includes(id) ? <FaHeart /> : <FaRegHeart />}
                   </span>
                 </div>
               )}

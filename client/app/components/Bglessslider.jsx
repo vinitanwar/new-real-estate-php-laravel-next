@@ -69,7 +69,7 @@ useEffect(()=>{
                     <p className="text-sm text-[#8993A4] text-start mb-4">{slider.propertyvalue}+ Properties</p>
                   </div>
                   <div className="img absolute bottom-0 left-0 right-0 rounded-md transition-transform duration-300 ease-in-out hover:scale-110">
-                    <img src={`${storageLink}/${slider.images_paths}`} width={200} height={200} className="w-full h-auto rounded-md" alt={slider.heading} />
+                    <img src={`https://admin.ever4uproperties.com/storage/${slider.images_paths}`} width={200} height={200} className="w-full h-auto rounded-md" alt={slider.heading} />
                   </div>
                 </div>
               </div>

@@ -13,12 +13,12 @@ export default function Footer() {
       className="w-full bg-cover bg-center pt-10"
       style={{ backgroundImage: `url('/images/footer-bg.jpg')` }}
     >
-      <div className="container mx-auto px-5 md:px-16 xl:px-32">
+      <div className="container px-5 md:px-16 xl:px-32">
         {/* Logo and Social Icons */}
         <div className="grid grid-cols-1 sm:grid-cols-2 py-4 border-b border-[#ffffff1a]">
           <div className="flex items-center justify-center sm:justify-start mb-4 sm:mb-0">
             <Image
-              src="/images/logos.png"
+              src="/e4u-logo.png"
               className="logo w-[150px] lg:w-[200px] filter brightness-600"
               width={40}
               height={40}

@@ -270,7 +270,7 @@ console.log(`${baseurl}/Signupcustomer`, {
 
         <div>
           <Link href="/">
-            <img src="/images/logos.png" className="w-32 md:w-40   xl:w-60" />
+            <img src="/e4u-logo.png" className="w-[9rem]" />
           </Link>
         </div>
 
