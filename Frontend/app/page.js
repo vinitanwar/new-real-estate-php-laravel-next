@@ -1,4 +1,5 @@
-import Image from "next/image";
+
+
 
 import Hero from './components/Hero'
 import Slidercom from './components/Propertiescom';
@@ -8,9 +9,9 @@ import Testimonial from "./components/Testimonial";
 import Bglessslider from './components/Bglessslider';
 import Blog from "./components/Blog";
 
-import Nowme from "./components/Nowme";
+
 import Builderslider from "./components/Builderslider";
-export default function Home() {
+export default function page() {
   return (
    <>
   <Hero/>  

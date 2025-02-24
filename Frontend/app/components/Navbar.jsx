@@ -16,12 +16,7 @@ import { MdOutlineHeadphones } from "react-icons/md";
 import { RxHamburgerMenu } from "react-icons/rx";
 
 import Swal from "sweetalert2";
-// import 'sweetalert2/src/sweetalert2.scss'
 
-import { auth } from "../firebase.config";
-import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-
-import toast, { toastConfig } from "react-simple-toasts";
 import "react-simple-toasts/dist/theme/dark.css";
 import axios from "axios";
 import { baseurl } from "./store/baseurl";

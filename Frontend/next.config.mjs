@@ -1,15 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 
-  async redirects() {
-    return [
-      {
-        source: "/",
-        destination: "/home",
-        permanent: true,
-      },
-    ];
-  },
+  
     images: {
          unoptimized: true ,
         domains: [
@@ -18,9 +10,7 @@ const nextConfig = {
         ],
       },
   
-    // trailingSlash: true,
-    // // output: "export", 
-    // images: { unoptimized: true },
+
 }
 
 export default nextConfig;
