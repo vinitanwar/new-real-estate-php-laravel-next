@@ -10,18 +10,18 @@ import Blog from "./components/Blog";
 
 import Nowme from "./components/Nowme";
 import Builderslider from "./components/Builderslider";
-export default function home() {
+export default function Home() {
   return (
    <>
-  <Hero/> 
-  <Slidercom/>
-  <Bglessslider/>
+  {/* <Hero/>  */}
+  {/* <Slidercom/>
+  <Bglessslider/> */}
   <Aboutsection/>
-  <Sliderpropertycate/>
+  {/* <Sliderpropertycate/>
   <Builderslider/>
   <Testimonial/>
   <Blog/>
- 
+  */}
    </>
   );
 }
