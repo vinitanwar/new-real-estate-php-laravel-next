@@ -10,7 +10,7 @@ import Blog from "./components/Blog";
 
 import Nowme from "./components/Nowme";
 import Builderslider from "./components/Builderslider";
-export default function Home() {
+export default function home() {
   return (
    <>
   <Hero/> 
