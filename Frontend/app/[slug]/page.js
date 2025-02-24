@@ -17,7 +17,7 @@ export default async function Page({ params }) {
     return <SlugComponent slug={slug} data={response.data} />;
   } catch (error) {
     console.error('Error fetching property data:', error.message);
-    return <p>Error loading property details.</p>;
+   
   }
 }
 
