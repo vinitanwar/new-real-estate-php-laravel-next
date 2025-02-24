@@ -14,7 +14,7 @@ export default function Home() {
   return (
    <>
   <Hero/>  
-  <Slidercom/>
+  <Slidercom/> 
   <Bglessslider/>
   <Aboutsection/>
   <Sliderpropertycate/>
