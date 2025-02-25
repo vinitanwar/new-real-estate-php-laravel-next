@@ -28,6 +28,9 @@ import {
   Spinner,
 } from '@chakra-ui/react';
 import { MdGraphicEq } from 'react-icons/md';
+import Hero from '../components/Hero';
+import Slidercom from '../components/Propertiescom';
+import Bglessslider from '../components/Bglessslider';
 
 
 
@@ -460,7 +463,7 @@ export default function Page() {
 
   return (
     <>
-      <div className='w-full'>
+      {/* <div className='w-full'>
       <div className="w-full h-auto relative">
   <Image
     width={1920} // Updated to larger width for better scaling
@@ -489,12 +492,7 @@ export default function Page() {
         <div className='w-full  px-5 md:px-16 xl:px-32 py-8 bg-[#f7f7f7]'>
           <div className='flex justify-between flex-col md:flex-row gap-5 mb-5 '>
             <div className='flex items-center '>
-              {/* <CustomDropdown
-                options={['All', 'Sale', 'Rent', 'Buy']}
-                selectedOption={filter.type}
-                onOptionSelect={handleTypeChange}
-                label={'Listing Status'}
-              /> */}
+             
               <CustomDropdown
               options={['All', 'Sale', 'Rent', 'Buy','Pg','Plots']}
                 selectedOption={selectedType}
@@ -583,7 +581,14 @@ export default function Page() {
             </button>
           </div>
         </div>
-      </div>
+      
+      </div> */}
+
+   <Hero/> 
+     <Slidercom/> 
+   <Bglessslider/>
+ 
+
     </>
   );
 }
