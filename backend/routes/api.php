@@ -34,5 +34,9 @@ Route::post('v1/signupcustomer', [CustomerController::class,"SignupCustomer"]);
 Route::post('v1/logincustomer', [LoginController::class,"login"]);
 Route::get('v1/BannerImg', [Banner_image_controller::class,"bannerimage"]);
 Route::get('v1/aboutPage', [AboutController::class,"GetAbout"]);
+Route::get('v1/contact', [AboutController::class,"GetContect"]);
+
 Route::get('v1/policy', [PolicyController::class,"getPolicy"]);
 Route::post('v1/message', [MessageController::class,"SendMessage"]);
+
+

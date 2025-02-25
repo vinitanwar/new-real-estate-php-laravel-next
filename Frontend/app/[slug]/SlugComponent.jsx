@@ -393,13 +393,12 @@ const SlugComponent = async ({ slug }) => {
       bottomSwiperRef.current.swiper.slideNext();
     }
   };
-
+  
   // Handle previous slide for bottom slider
   const handlePrevSlideBottom = () => {
     if (bottomSwiperRef.current) {
       console.log(bottomSwiperRef.current.swiper.slidePrev());
-
-      bottomSwiperRef.current.swiper.slideNext();
+      bottomSwiperRef.current.swiper.slidePrev(); // Corrected to slidePrev()
     }
   };
 
@@ -407,7 +406,8 @@ const SlugComponent = async ({ slug }) => {
     <>
       <div className="w-full ">
         <div className="w-full h-auto shadow-lg rounded-md px-5 md:px-16 xl:px-32 py-5 md: bg-white ">
-          <div className="w-full relative">
+          <div className="flex w-full gap-3">
+          <div className="w-full relative lg:w-[70%]">
             <Swiper
               spaceBetween={10}
               slidesPerView={1}
@@ -446,48 +446,54 @@ const SlugComponent = async ({ slug }) => {
             </div>
           </div>
 
-          <div className="w-full my-4 flex justify-betweem items-center">
-            <div className=" w-full lg:w-[80%]">
-              <Swiper
-                loop={true}
-                breakpoints={{
-                  0: {
-                    slidesPerView: 4,
-                    spaceBetween: 20,
-                  },
-                  700: {
-                    slidesPerView: 4,
-                    spaceBetween: 10,
-                  },
-                  1024: {
-                    slidesPerView: 4,
-                    spaceBetween: 20,
-                  },
-                }}
-                ref={bottomSwiperRef}
-                modules={[Navigation]}
-                className="myBottomSwiper"
-              >
-                {singledata &&
-                  singledata.images_paths &&
-                  singledata.images_paths.map((info, index) => {
-                    return (
-                      <SwiperSlide onClick={() => handleSlideClick(index)}>
-                        <Image
-                          className="w-full h-[90px] lg:h-[150px] rounded-2xl"
-                          width={200}
-                          height={200}
-                          src={`${storageLink}/${info}`}
-                          alt="Slide 1"
-                        />
-                      </SwiperSlide>
-                    );
-                  })}
-              </Swiper>
+          <div className=" w-full  lg:w-[30%] h-full flex justify-betweem items-center">
+            <div className=" w-full lg:w-[100%] h-full">
+            <Swiper
+  loop={true}
+  breakpoints={{
+    0: {
+      slidesPerView: 4,
+      spaceBetween: 20,
+    },
+    700: {
+      slidesPerView: 4,
+      spaceBetween: 10,
+    },
+    1024: {
+      slidesPerView: 4,
+      spaceBetween: 20,
+    },
+  }}
+  direction={'vertical'}
+  ref={bottomSwiperRef}
+  modules={[Navigation]}
+  className="myBottomSwiper h-[480px]" // Fixed container height
+>
+  {singledata?.images_paths?.map((info, index) => (
+    <SwiperSlide 
+      key={index} 
+      onClick={() => handleSlideClick(index)} 
+      className=" h-[120px] " // Reduced slide height
+    >
+      <Image
+        className="w-full h-[120px]  rounded-2xl object-cover"
+        width={200}
+        height={200}
+        src={`${storageLink}/${info}`}
+        alt={`Slide ${index + 1}`}
+      />
+    </SwiperSlide>
+  ))}
+</Swiper>
             </div>
 
-            <div className="w-[40%]  hidden lg:block ">
-              <div className="flex justify-evenly">
+            
+          </div>
+
+
+
+          <div className="  hidden w-[10%] lg:block  ">
+              <div className="flex flex-col gap-[13rem]">
                 <div
                   className="rightArrow w-16 h-16 flex items-center cursor-pointer  justify-center border rounded-full  hover:bg-black hover:text-white border-black text-4xl"
                   onClick={handlePrevSlideBottom}
@@ -495,14 +501,21 @@ const SlugComponent = async ({ slug }) => {
                   <IoIosArrowBack />
                 </div>
                 <div
-                  className="leftArrow w-16 h-16 flex items-center justify-center border rounded-full cursor-pointer  hover:bg-black hover:text-white border-black text-4xl"
+                  className="leftArrow  w-16 h-16 flex items-center justify-center border rounded-full cursor-pointer  hover:bg-black hover:text-white border-black text-4xl"
                   onClick={handleNextSlideBottom}
                 >
                   <IoIosArrowForward />
                 </div>
               </div>
             </div>
+
           </div>
+
+
+          {/* */}
+
+
+
         </div>
 
         {/* END Slider Div */}
