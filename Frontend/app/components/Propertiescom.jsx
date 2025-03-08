@@ -118,21 +118,21 @@ export default function Slidercom() {
             Array.isArray(newData) && newData.length > 0 ? (
               newData.slice(0, visibleCount).map((item, index) => (
                 <Cards
-                  key={index}
-                  img={item.images_paths?.[0] || "default-image.jpg"} // Fallback for missing images
-                  head={item.name}
-                  add={item.address}
-                  bed={item.bedroom}
-                  bath={item.bathroom}
-                  slug={item.slug}
-                  space={item.rate_per_square_feet}
-                  price={item.price}
-                  cate={item.type}
-                  flag={item.type}
-                  id={item.id}
-                  handelwishlist={handelwishlist}
-                  wishlist={wishlist}
-                />
+  key={index}
+  img={item.images_paths?.[0] || "default-image.jpg"} 
+  head={item.name}
+  add={item.address}
+  bed={item.bedroom}
+  bath={item.bathroom}
+  slug={item.slug}
+  space={item.rate_per_square_feet}
+  price={item.price}
+  cate={["All", "Rent", "Pg", "Buy", "Commercial"][item.type] || "Unknown"} 
+  flag={item.type}
+  id={item.id}
+  handelwishlist={handelwishlist}
+  wishlist={wishlist}
+/>
               ))
             ) : (
               <p className="text-center text-gray-500">No data available.</p>

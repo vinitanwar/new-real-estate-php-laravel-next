@@ -1,13 +1,26 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
 import Link from "next/link";
 import { FaLinkedin } from "react-icons/fa6";
+import axios from "axios";
+import { baseurl } from "./store/baseurl";
 
 
 export default function Footer() {
+const [contact,setcontact]=useState()
+const fetchapicontact=async()=>{
+  let response=await  axios.get(`${baseurl}/contact`)
+  response = await response.data;
+  setcontact(response)
+}
+useEffect(()=>{
+  fetchapicontact()
+},[])
+
+  
   return (
     <footer
       className="w-full bg-cover bg-center pt-10"
@@ -120,11 +133,11 @@ export default function Footer() {
           <div className="flex flex-col gap-y-5">
             <div className="text-white xl:hidden ">
               <p className="text-[#bebdbd] text-sm">Total Free Customer Care</p>
-              <h6 className="font-semibold text-lg">+(0) 123 050 945 02</h6>
+              <h6 className="font-semibold text-lg">{contact?.number}</h6>
             </div>
             <div className="text-white xl:hidden">
               <p className="text-[#bebdbd] text-sm">Need Live Support?</p>
-              <h6 className="font-semibold text-lg">hi@trc.com</h6>
+              <h6 className="font-semibold text-lg">{contact?.email}</h6>
             </div>
 
             <div className="hidden xl:flex gap-x-10">
@@ -132,11 +145,11 @@ export default function Footer() {
                 <p className="text-[#bebdbd] text-sm">
                   Total Free Customer Care
                 </p>
-                <h6 className="font-semibold text-lg">+(0) 123 050 945 02</h6>
+                <h6 className="font-semibold text-lg">{contact?.number}</h6>
               </div>
               <div className="text-white ">
                 <p className="text-[#bebdbd] text-sm">Need Live Support?</p>
-                <h6 className="font-semibold text-lg">hi@trc.com</h6>
+                <h6 className="font-semibold text-lg">{contact?.email}</h6>
               </div>
             </div>
             <div>
